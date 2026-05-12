@@ -118,7 +118,7 @@ def _parse_dataframe(df, source_path: str, sheet_name: str = "") -> RentRollData
     total_sqft = sum(u.sqft for u in units if u.sqft) or 0.0
     in_place_monthly = sum(u.current_rent for u in units if u.current_rent and not u.vacant) or 0.0
     market_monthly = sum(
-        u.market_rent or u.current_rent or 0 for u in units if not u.vacant
+        u.market_rent or u.current_rent or 0 for u in units
     ) or 0.0
     gpr_monthly = sum(
         u.market_rent or u.current_rent or 0 for u in units

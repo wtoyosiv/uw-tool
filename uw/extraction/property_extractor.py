@@ -10,7 +10,9 @@ logger = logging.getLogger(__name__)
 PROPERTY_TYPE_KEYWORDS = {
     "multifamily": ["apartment", "multifamily", "multi-family", "units", "residential",
                     "duplex", "triplex", "fourplex", "complex", "townhome", "townhouse"],
-    "retail": ["retail", "shopping", "strip center", "strip mall", "storefront", "commercial"],
+    # Avoid broad terms like "commercial"; they cause office/industrial deals to
+    # tie retail just because most CRE documents say "commercial".
+    "retail": ["retail", "shopping", "strip center", "strip mall", "storefront"],
     "office": ["office", "professional", "medical office", "flex office"],
     "industrial": ["industrial", "warehouse", "distribution", "flex", "manufacturing", "storage"],
     "mixed_use": ["mixed-use", "mixed use", "mixed_use", "live-work"],

@@ -26,10 +26,11 @@ def read_excel(path: Path) -> Dict[str, object]:
             # Pre-scan to find the widest row, then force that many columns so that
             # rows with trailing commas (e.g. vacant units) are padded with NaN
             # instead of being dropped as "bad lines".
+            import csv
             import io
             raw = path.read_text(encoding="utf-8-sig", errors="replace")
             max_cols = max(
-                (len(line.split(",")) for line in raw.splitlines() if line.strip()),
+                (len(row) for row in csv.reader(io.StringIO(raw)) if row),
                 default=1,
             )
             df = pd.read_csv(

@@ -1,5 +1,6 @@
 """Calculate investment return metrics."""
-from typing import List
+import math
+from typing import List, Optional
 from uw.underwriting.models import CashFlowModel, UWAssumptions, IncomeModel, ExpenseModel, ReturnsModel
 
 
@@ -88,15 +89,64 @@ def _calculate_irr(
     return _newton_irr(cash_flows)
 
 
+def _npv(cash_flows: List[float], rate: float) -> float:
+    return sum(cf / (1 + rate) ** t for t, cf in enumerate(cash_flows))
+
+
 def _newton_irr(cash_flows: List[float], guess: float = 0.10, tol: float = 1e-6, max_iter: int = 100) -> float:
     rate = guess
     for _ in range(max_iter):
-        npv = sum(cf / (1 + rate) ** t for t, cf in enumerate(cash_flows))
+        if rate <= -0.999999:
+            break
+        npv = _npv(cash_flows, rate)
         dnpv = sum(-t * cf / (1 + rate) ** (t + 1) for t, cf in enumerate(cash_flows))
         if abs(dnpv) < 1e-12:
             break
         new_rate = rate - npv / dnpv
+        if not math.isfinite(new_rate) or new_rate <= -0.999999:
+            break
         if abs(new_rate - rate) < tol:
             return new_rate
         rate = new_rate
-    return rate
+
+    fallback = _bisection_irr(cash_flows, tol=tol)
+    return fallback if fallback is not None else 0.0
+
+
+def _bisection_irr(cash_flows: List[float], tol: float = 1e-6) -> Optional[float]:
+    """Find a stable IRR root, returning None when no bracketed root exists."""
+    low = -0.9999
+    high = 10.0
+    steps = 1000
+
+    prev_rate = low
+    prev_npv = _npv(cash_flows, prev_rate)
+    if abs(prev_npv) < tol:
+        return prev_rate
+
+    for i in range(1, steps + 1):
+        rate = low + (high - low) * i / steps
+        npv = _npv(cash_flows, rate)
+        if abs(npv) < tol:
+            return rate
+        if prev_npv * npv < 0:
+            return _bisect_between(cash_flows, prev_rate, rate, tol)
+        prev_rate = rate
+        prev_npv = npv
+
+    return None
+
+
+def _bisect_between(cash_flows: List[float], low: float, high: float, tol: float) -> float:
+    low_npv = _npv(cash_flows, low)
+    for _ in range(100):
+        mid = (low + high) / 2
+        mid_npv = _npv(cash_flows, mid)
+        if abs(mid_npv) < tol or abs(high - low) < tol:
+            return mid
+        if low_npv * mid_npv < 0:
+            high = mid
+        else:
+            low = mid
+            low_npv = mid_npv
+    return (low + high) / 2
