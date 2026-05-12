@@ -1,0 +1,71 @@
+{
+  "multifamily": {
+    "expense_basis": "per_unit",
+    "income_basis": "per_unit",
+    "vacancy_rate": 0.05,
+    "management_fee_pct": 0.05,
+    "repairs_maintenance_per_unit": 600,
+    "payroll_per_unit": 400,
+    "insurance_per_unit": 300,
+    "replacement_reserves_per_unit": 250,
+    "other_income_per_unit": 50,
+    "typical_expense_ratio": 0.42,
+    "risk_flags": ["tax_reassessment", "rent_growth", "deferred_maintenance"]
+  },
+  "retail": {
+    "expense_basis": "per_sqft",
+    "income_basis": "per_sqft",
+    "vacancy_rate": 0.08,
+    "management_fee_pct": 0.04,
+    "insurance_per_sqft": 0.30,
+    "replacement_reserves_per_sqft": 0.20,
+    "typical_expense_ratio": 0.35,
+    "risk_flags": ["anchor_tenant", "lease_rollover", "dark_anchor", "online_retail"]
+  },
+  "office": {
+    "expense_basis": "per_sqft",
+    "income_basis": "per_sqft",
+    "vacancy_rate": 0.10,
+    "management_fee_pct": 0.04,
+    "insurance_per_sqft": 0.35,
+    "replacement_reserves_per_sqft": 0.25,
+    "typical_expense_ratio": 0.45,
+    "risk_flags": ["lease_rollover", "tenant_improvement", "remote_work_trend"]
+  },
+  "industrial": {
+    "expense_basis": "per_sqft",
+    "income_basis": "per_sqft",
+    "vacancy_rate": 0.04,
+    "management_fee_pct": 0.03,
+    "insurance_per_sqft": 0.20,
+    "replacement_reserves_per_sqft": 0.15,
+    "typical_expense_ratio": 0.25,
+    "risk_flags": ["single_tenant", "lease_rollover", "clear_height"]
+  },
+  "mixed_use": {
+    "expense_basis": "blended",
+    "income_basis": "blended",
+    "vacancy_rate": 0.06,
+    "management_fee_pct": 0.05,
+    "typical_expense_ratio": 0.40,
+    "risk_flags": ["mixed_use_complexity", "commercial_vacancy", "zoning"]
+  },
+  "land": {
+    "expense_basis": "per_acre",
+    "income_basis": "none",
+    "vacancy_rate": 0.0,
+    "management_fee_pct": 0.0,
+    "typical_expense_ratio": 0.05,
+    "risk_flags": ["entitlement_risk", "carry_cost", "zoning_change", "infrastructure"]
+  },
+  "net_lease": {
+    "expense_basis": "per_sqft",
+    "income_basis": "per_sqft",
+    "vacancy_rate": 0.02,
+    "management_fee_pct": 0.02,
+    "insurance_per_sqft": 0.05,
+    "replacement_reserves_per_sqft": 0.05,
+    "typical_expense_ratio": 0.10,
+    "risk_flags": ["tenant_credit", "lease_expiration", "dark_risk", "retenanting_cost"]
+  }
+}
