@@ -46,7 +46,7 @@ def build_income_model(
     # Prefer actual other-income line items from T12 over defaults.
     OTHER_INCOME_KEYWORDS = ["other income", "laundry", "parking", "late fee",
                              "pet fee", "storage", "vending", "misc income",
-                             "miscellaneous income", "ancillary"]
+                             "miscellaneous income", "ancillary", "security deposit"]
     extracted_other = sum(
         item.amount for item in financials.income_items
         if any(kw in item.label.lower() for kw in OTHER_INCOME_KEYWORDS)

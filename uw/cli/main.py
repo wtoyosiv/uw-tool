@@ -110,6 +110,8 @@ def underwrite(
     # Rent roll is authoritative for unit count and sqft — override extracted text values
     if rent_roll.total_units > 0:
         prop_info.total_units = rent_roll.total_units
+        if prop_info.property_type in ("unknown", "land", "covered_land"):
+            prop_info.property_type = "multifamily"
     if rent_roll.total_sqft > 0:
         prop_info.total_sqft = rent_roll.total_sqft
 

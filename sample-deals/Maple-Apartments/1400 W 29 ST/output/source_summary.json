@@ -1,0 +1,37 @@
+{
+  "run_timestamp": "2026-05-12T18:19:01.596235",
+  "files": [
+    {
+      "path": "sample-deals\\Maple-Apartments\\1400 W 29 ST\\1400_rent_roll_in_template.xlsx",
+      "filename": "1400_rent_roll_in_template.xlsx",
+      "extension": ".xlsx",
+      "size_bytes": 11512,
+      "category": "rent_roll",
+      "confidence": 0.95,
+      "notes": ""
+    },
+    {
+      "path": "sample-deals\\Maple-Apartments\\1400 W 29 ST\\income_statement_12_month-20260508 (1).pdf",
+      "filename": "income_statement_12_month-20260508 (1).pdf",
+      "extension": ".pdf",
+      "size_bytes": 75924,
+      "category": "t12",
+      "confidence": 0.9,
+      "notes": ""
+    },
+    {
+      "path": "sample-deals\\Maple-Apartments\\1400 W 29 ST\\Miami-Dade-Real-Estate-04-3011-002-1400-2025-Annual-bill.pdf",
+      "filename": "Miami-Dade-Real-Estate-04-3011-002-1400-2025-Annual-bill.pdf",
+      "extension": ".pdf",
+      "size_bytes": 1763895,
+      "category": "unknown",
+      "confidence": 0.3,
+      "notes": ""
+    }
+  ],
+  "category_counts": {
+    "rent_roll": 1,
+    "t12": 1,
+    "unknown": 1
+  }
+}
